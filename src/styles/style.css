@@ -1,0 +1,89 @@
+
+:root {
+  --maxWidth: 1440px;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5));
+  font-family: 'Roboto', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: #ffffff;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+  font-style: normal;
+  font-weight: normal;
+  color: #ffffff;
+  user-select: none;
+  outline: none;
+}
+
+.btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color:rgba(174, 181, 185, 0.5);
+  font-family: inherit;
+  font-size: inherit;
+  color: #ffffff;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+}
+
+.btn:hover {
+  background-color: rgba(76, 82, 85, 0.4);
+  transition: background-color 0.4s ease 0s;
+}
+
+.btn:active {
+  font-weight: bold;
+  background-color: rgba(76, 82, 85, 0.4);
+  transition: background-color 0.4s ease 0s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* app -------------------------------------------------------------------------------------- */
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5));
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.main {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--maxWidth);
+  margin: 0 auto auto;
+  padding: 2.5% 2.5% 3.5%;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
