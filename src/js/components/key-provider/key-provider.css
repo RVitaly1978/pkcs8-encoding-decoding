@@ -1,0 +1,15 @@
+.key_provider {
+  grid-area: key;
+
+  width: 100%;
+  padding-bottom: var(--padding);
+
+  border-bottom: var(--border);
+  border-width: 5px;
+}
+
+.key_input {
+  display: block;
+
+  resize: none;
+}

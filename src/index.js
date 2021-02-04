@@ -1,5 +1,5 @@
 import Renderer from './js/dom/renderer';
-import App from './js/app';
+import App from './js/components/app';
 
 import './styles/style.css';
 

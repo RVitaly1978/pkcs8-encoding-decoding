@@ -1,0 +1,37 @@
+.encode_section {
+  grid-area: encoding;
+
+  width: 100%;
+  padding-right: var(--padding);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.encode_input {
+  display: flex;
+}
+
+.encode_message {
+  flex-grow: 1;
+}
+
+.encode_btn {
+  min-width: 15rem;
+}
+
+.encode_output {
+  margin-top: 0.5rem;
+  padding: var(--padding);
+
+  flex-grow: 1;
+
+  border: var(--border);
+  border-radius: var(--borderRadius);
+
+  user-select: unset;
+}
+
+.encode_output::selection {
+  background-color: rgba(9, 32, 46, 0.2);
+}

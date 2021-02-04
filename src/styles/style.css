@@ -1,63 +1,85 @@
-
 :root {
   --maxWidth: 1440px;
+  --padding: 10px;
+  --borderRadius: 4px;
+  --border: 1px solid rgba(9, 32, 46, 0.9);
+  --boxShadow: 0px 0px 2px 1px rgba(9, 32, 46, 0.9);
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
-  position: relative;
+  box-sizing: border-box;
+
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5));
+
+  background-color: rgba(0, 0, 0, 0.4);
+
   font-family: 'Roboto', Arial, sans-serif;
   font-style: normal;
-  font-weight: normal;
-  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #dddddd;
 }
 
-div {
-  margin: 0;
-  padding: 0;
-  user-select: none;
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+  font: inherit;
+  color: inherit;
 }
 
-p {
+div, p {
   margin: 0;
   padding: 0;
-  font-style: normal;
-  font-weight: normal;
-  color: #ffffff;
+
+  font: inherit;
+  color: inherit;
+
   user-select: none;
   outline: none;
 }
 
-.btn {
+button {
   margin: 0;
-  padding: 0;
+  padding: var(--padding);
+
   border: none;
-  background-color:rgba(174, 181, 185, 0.5);
-  font-family: inherit;
-  font-size: inherit;
-  color: #ffffff;
+  border-radius: var(--borderRadius);
+  background-color:rgba(9, 32, 46, 0.2);
+
+  font: inherit;
+  color: inherit;
+
   cursor: pointer;
   user-select: none;
   outline: none;
+
+  transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-  background-color: rgba(76, 82, 85, 0.4);
-  transition: background-color 0.4s ease 0s;
+button:hover {
+  background-color:rgba(9, 32, 46, 0.5);
 }
 
-.btn:active {
-  font-weight: bold;
-  background-color: rgba(76, 82, 85, 0.4);
-  transition: background-color 0.4s ease 0s;
+button:active {
+  background-color: rgba(9, 32, 46, 0.9);
+}
+
+button:disabled {
+  pointer-events: none;
+  opacity: 0.3;
 }
 
 ul {
   margin: 0;
   padding: 0;
-  display: flex;
+
   list-style: none;
 }
 
@@ -66,24 +88,67 @@ li {
   padding: 0;
 }
 
-/* app -------------------------------------------------------------------------------------- */
+textarea {
+  margin: 0;
+  padding: var(--padding);
 
-.app {
-  width: 100%;
-  min-height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5),  rgba(0, 0, 0, 0.5));
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  border: var(--border);
+  border-radius: var(--borderRadius);
+
+  background-color: inherit;
+
+  font: inherit;
+  color: inherit;
+  outline: none;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-.main {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: var(--maxWidth);
-  margin: 0 auto auto;
-  padding: 2.5% 2.5% 3.5%;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
+textarea::selection {
+  background-color: rgba(9, 32, 46, 0.2);
+}
+
+textarea::-webkit-scrollbar {
+  width: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background-color: rgba(9, 32, 46, 0.9);
+}
+
+textarea:not(:focus)::-webkit-scrollbar {
+  display: none;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 2px;
+}
+
+textarea:focus {
+  box-shadow: inset var(--boxShadow);
+}
+
+input[type='search'] {
+  margin: 0;
+  padding: var(--padding);
+
+  border: var(--border);
+  border-radius: var(--borderRadius);
+
+  background-color: inherit;
+
+  font: inherit;
+  color: inherit;
+  outline: none;
+}
+
+input[type='search']::selection {
+  background-color: rgba(9, 32, 46, 0.2);
+}
+
+input[type='search']:focus {
+  box-shadow: inset var(--boxShadow);
 }
