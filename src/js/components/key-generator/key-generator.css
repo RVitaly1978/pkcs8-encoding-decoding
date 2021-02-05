@@ -1,0 +1,42 @@
+.generate_section {
+  grid-area: generateKey;
+
+  width: 100%;
+  padding-bottom: var(--padding);
+
+  display: flex;
+  flex-direction: column;
+
+  border-bottom: var(--border);
+  border-width: 5px;
+}
+
+.generate_section button {
+  display: block;
+
+  width: 100%;
+}
+
+.output_row {
+  flex-grow: 1;
+
+  margin-top: 0.5rem;
+
+  display: flex;
+  align-items: stretch;
+}
+
+.output_row textarea + textarea {
+  margin-left: calc(3 * var(--padding));
+}
+
+.key_view {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  height: 100%;
+
+  display: block;
+
+  resize: none;
+}

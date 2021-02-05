@@ -1,7 +1,11 @@
 import isString from './is-string';
-import isString2 from './is-string2';
+import generateKey from './generate-key';
+import exportKey from './export-key';
+import toPem from './to-pem';
 
 export {
   isString,
-  isString2,
+  generateKey,
+  exportKey,
+  toPem,
 };

@@ -1,57 +1,47 @@
 import Renderer from '../../dom/renderer';
 
+// import { generateKey, exportKey, toPem } from '../../utils';
+
 import './key-provider.css';
 
 class KeyProvider {
-  constructor({ setState }) {
+  constructor({ setState, keyType }) {
     this.setState = setState;
+    this.keyType = keyType;
     this.onSubmit = this.onSubmit.bind(this);
-    this.onClick = this.onClick.bind(this);
 
-    this.input = Renderer.createElement('textarea', {
+    this.keyInput = Renderer.createElement('textarea', {
       class: 'key_input',
-      cols: 80,
-      rows: 10,
+      cols: 70,
+      rows: 15,
+      placeholder: `Type the ${this.keyType} key in PKCS#8 in PEM-encoding`,
     });
-
-    this.generateButton = Renderer.createElement('button', {
-      type: 'button',
-      class: 'key_btn',
-      disabled: true,
-      children: ['Generate a key'],
-    });
-    this.generateButton.addEventListener('click', this.onClick);
 
     this.submitButton = Renderer.createElement('button', {
       type: 'submit',
       class: 'key_btn',
+      // disabled: true,
       children: ['Submit a key'],
     });
   }
 
-  onClick() {
-    this.input.value = 'button click';
-  }
-
   onSubmit(evt) {
     evt.preventDefault();
-    const { value } = this.input;
+    const { value } = this.keyInput;
 
     if (!value) {
-      alert('Введите (в соответствии с PKCS#8) или сренерируйте private key');
       return;
     }
 
-    this.setState({ key: value });
+    this.setState({ [this.keyType]: value });
   }
 
   render() {
     this.form = Renderer.createElement('form', {
       class: 'key_provider',
       children: [
-        this.input,
+        this.keyInput,
         this.submitButton,
-        this.generateButton,
       ],
     });
     this.form.addEventListener('submit', this.onSubmit);

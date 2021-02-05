@@ -11,14 +11,30 @@
   padding: var(--padding);
 
   display: grid;
-  grid-template-rows: 1fr minmax(1rem, 100%);
+  grid-template-rows: minmax(1rem, 50%) minmax(1rem, 50%) minmax(1rem, 20%);
   grid-template-columns: 1fr 1fr;
   grid-gap: var(--padding);
 
   grid-template-areas:
-  "key key"
+  "generateKey generateKey"
+  "keyProvider keyProvider"
   "encoding decoding";
 
   justify-content: center;
   align-content: center;
+}
+
+.keys_provider_section {
+  grid-area: keyProvider;
+
+  display: flex;
+
+  padding-bottom: var(--padding);
+
+  border-bottom: var(--border);
+  border-width: 5px;
+}
+
+.keys_provider_section form + form {
+  margin-left: calc(3 * var(--padding));
 }

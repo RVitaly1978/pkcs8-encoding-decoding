@@ -100,6 +100,7 @@ textarea {
   font: inherit;
   color: inherit;
   outline: none;
+  font-size: 0.75em;
 
   overflow-y: scroll;
   overflow-x: hidden;
