@@ -23,13 +23,15 @@
 .decode_output {
   margin-top: 0.5rem;
   padding: var(--padding);
-
-  flex-grow: 1;
+  
+  width: 100%;
+  /* flex-grow: 1;
+  flex-shrink: 1; */
 
   border: var(--border);
   border-radius: var(--borderRadius);
 
-  user-select: unset;
+  user-select: text;
 }
 
 .decode_output::selection {

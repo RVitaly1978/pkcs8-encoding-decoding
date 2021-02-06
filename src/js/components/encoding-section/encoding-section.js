@@ -1,9 +1,13 @@
 import Renderer from '../../dom/renderer';
 
+import { utf8ToArrayBuffer, encryptData, arrayBufferToBase64 } from '../../utils';
+
 import './encoding-section.css';
 
 class EncodingSection {
-  constructor() {
+  constructor({ publicKey }) {
+    this.publicKey = publicKey;
+
     this.input = Renderer.createElement('input', {
       class: 'encode_message',
       type: 'search',
@@ -13,20 +17,33 @@ class EncodingSection {
     this.button = Renderer.createElement('button', {
       type: 'button',
       class: 'encode_btn',
+      disabled: (this.publicKey),
       children: ['Encode'],
     });
     this.onClick = this.onClick.bind(this);
     this.button.addEventListener('click', this.onClick);
 
-    this.output = Renderer.createElement('div', {
+    this.output = Renderer.createElement('textarea', {
       class: 'encode_output',
-      children: ['The message is not encoded'],
+      cols: 70,
+      rows: 15,
+      placeholder: 'The message is not encoded',
     });
   }
 
-  onClick() {
+  setKey(key) {
+    this.publicKey = key;
+    this.button.disabled = false;
+  }
+
+  async onClick() {
     const { value } = this.input;
-    this.output.innerHTML = value;
+
+    const data = utf8ToArrayBuffer(value);
+    const encrypted = await encryptData(data, this.publicKey);
+    const b64 = arrayBufferToBase64(encrypted);
+
+    this.output.innerHTML = b64;
   }
 
   render() {

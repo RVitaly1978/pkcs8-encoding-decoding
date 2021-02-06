@@ -24,12 +24,15 @@
   margin-top: 0.5rem;
   padding: var(--padding);
 
-  flex-grow: 1;
+  width: 100%;
+  max-width: 50rem;
+  /* flex-grow: 1;
+  flex-shrink: 1; */
 
   border: var(--border);
   border-radius: var(--borderRadius);
 
-  user-select: unset;
+  user-select: text;
 }
 
 .encode_output::selection {

@@ -1,6 +1,10 @@
 import Renderer from '../../dom/renderer';
 
-import { generateKey, exportKey, toPem } from '../../utils';
+import {
+  generateKeys,
+  exportKey,
+  toPem,
+} from '../../utils';
 
 import './key-generator.css';
 
@@ -31,13 +35,13 @@ class KeyGenerator {
   }
 
   async onClick() {
-    const key = await generateKey();
+    const keys = await generateKeys();
 
-    const exportedPublic = await exportKey(key.publicKey, false);
+    const exportedPublic = await exportKey(keys.publicKey, false);
     const pemPublic = toPem(exportedPublic, false);
     this.outputPublic.value = pemPublic;
 
-    const exportedPrivate = await exportKey(key.privateKey);
+    const exportedPrivate = await exportKey(keys.privateKey);
     const pemPrivate = toPem(exportedPrivate);
     this.outputPrivate.value = pemPrivate;
   }

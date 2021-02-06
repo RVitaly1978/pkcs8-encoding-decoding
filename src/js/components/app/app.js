@@ -1,6 +1,8 @@
 import State from '../state';
 import Renderer from '../../dom/renderer';
 
+import keyTypes from '../../constants';
+
 import KeyGenerator from '../key-generator';
 import KeyProvider from '../key-provider';
 import EncodingSection from '../encoding-section';
@@ -8,36 +10,60 @@ import DecodingSection from '../decoding-section';
 
 import './app.css';
 
-const keyTypes = {
-  public: 'public',
-  private: 'private',
-};
-
 class App {
   constructor() {
     this.state = new State({
-      [keyTypes.private]: undefined,
-      [keyTypes.public]: undefined,
+      [keyTypes.private]: null,
+      [keyTypes.public]: null,
     });
 
     this.setState = this.setState.bind(this);
+    this.updatePublicKey = this.updatePublicKey.bind(this);
+    this.updatePrivateKey = this.updatePrivateKey.bind(this);
 
     this.keyGenerator = new KeyGenerator();
+
     this.publicKeyProvider = new KeyProvider({
       setState: this.setState,
       keyType: keyTypes.public,
     });
+
     this.privateKeyProvider = new KeyProvider({
       setState: this.setState,
       keyType: keyTypes.private,
     });
-    this.encodingSection = new EncodingSection();
-    this.decodingSection = new DecodingSection();
+
+    this.encodingSection = new EncodingSection({
+      publicKey: this.state.getState()[keyTypes.public],
+    });
+
+    this.decodingSection = new DecodingSection({
+      privateKey: this.state.getState()[keyTypes.private],
+    });
+
+    this.state.subscribe(this.updatePublicKey);
+    this.state.subscribe(this.updatePrivateKey);
   }
 
   setState(nextState) {
     this.state.update(nextState);
     this.state.notify();
+  }
+
+  updatePublicKey() {
+    const key = this.state.getState()[keyTypes.public];
+
+    if (key) {
+      this.encodingSection.setKey(key);
+    }
+  }
+
+  updatePrivateKey() {
+    const key = this.state.getState()[keyTypes.private];
+
+    if (key) {
+      this.decodingSection.setKey(key);
+    }
   }
 
   render() {

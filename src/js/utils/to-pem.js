@@ -1,30 +1,32 @@
-const arrayBufferToBase64 = (arrayBuffer) => {
-  const byteArray = new Uint8Array(arrayBuffer);
+import { arrayBufferToBase64 } from './encode-decode-data';
 
-  const byteString = String.fromCharCode.apply(null, byteArray);
-
-  const b64 = window.btoa(byteString);
-
-  return b64;
-};
-
-const addNewLines = (oneLineString) => {
+const splitOneLineToMultiLineStr = (oneLineString, count = 64) => {
   let str = oneLineString;
   let multiLineString = '';
+  const splitter = '\n';
 
   while (str.length > 0) {
-    multiLineString += `${str.substring(0, 64)}\n`;
-    str = str.substring(64);
+    multiLineString += `${str.substring(0, count)}${splitter}`;
+    str = str.substring(count);
   }
 
-  return multiLineString;
+  return multiLineString.substring(0, multiLineString.length - 1);
+};
+
+const addHeaderAndFooter = (body, isPrivate) => {
+  const splitter = '\n';
+
+  const type = isPrivate ? 'PRIVATE' : 'PUBLIC';
+  const header = `-----BEGIN ${type} KEY-----`;
+  const footer = `-----END ${type} KEY-----`;
+
+  return `${header}${splitter}${body}${splitter}${footer}`;
 };
 
 const toPem = (key, isPrivate = true) => {
-  const multiLineString = addNewLines(arrayBufferToBase64(key));
-
-  const type = isPrivate ? 'PRIVATE' : 'PUBLIC';
-  const pem = `-----BEGIN ${type} KEY-----\n${multiLineString}-----END ${type} KEY-----`;
+  const base64 = arrayBufferToBase64(key);
+  const multiLineString = splitOneLineToMultiLineStr(base64);
+  const pem = addHeaderAndFooter(multiLineString, isPrivate);
 
   return pem;
 };

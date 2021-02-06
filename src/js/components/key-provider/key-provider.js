@@ -1,6 +1,7 @@
 import Renderer from '../../dom/renderer';
 
-// import { generateKey, exportKey, toPem } from '../../utils';
+import { pemToArrayBuffer, importKey } from '../../utils';
+import keyTypes from '../../constants';
 
 import './key-provider.css';
 
@@ -21,11 +22,11 @@ class KeyProvider {
       type: 'submit',
       class: 'key_btn',
       // disabled: true,
-      children: ['Submit a key'],
+      children: [`Submit a ${this.keyType} key`],
     });
   }
 
-  onSubmit(evt) {
+  async onSubmit(evt) {
     evt.preventDefault();
     const { value } = this.keyInput;
 
@@ -33,7 +34,11 @@ class KeyProvider {
       return;
     }
 
-    this.setState({ [this.keyType]: value });
+    const isPrivate = (this.keyType === keyTypes.private);
+    const key = pemToArrayBuffer(value, isPrivate);
+    const imported = await importKey(key, isPrivate);
+
+    this.setState({ [this.keyType]: imported });
   }
 
   render() {

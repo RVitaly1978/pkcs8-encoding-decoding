@@ -1,9 +1,13 @@
 import Renderer from '../../dom/renderer';
 
+import { decryptData, base64ToArrayBuffer, bufferSourceToUtf8 } from '../../utils';
+
 import './decoding-section.css';
 
 class DecodingSection {
-  constructor() {
+  constructor({ privateKey }) {
+    this.privateKey = privateKey;
+
     this.input = Renderer.createElement('input', {
       class: 'decode_message',
       type: 'search',
@@ -13,20 +17,33 @@ class DecodingSection {
     this.button = Renderer.createElement('button', {
       type: 'button',
       class: 'decode_btn',
+      disabled: (this.privateKey),
       children: ['Decode'],
     });
     this.onClick = this.onClick.bind(this);
     this.button.addEventListener('click', this.onClick);
 
-    this.output = Renderer.createElement('div', {
+    this.output = Renderer.createElement('textarea', {
       class: 'decode_output',
-      children: ['The message is not decoded'],
+      cols: 70,
+      rows: 15,
+      placeholder: 'The message is not decoded',
     });
   }
 
-  onClick() {
+  setKey(key) {
+    this.privateKey = key;
+    this.button.disabled = false;
+  }
+
+  async onClick() {
     const { value } = this.input;
-    this.output.innerHTML = value;
+
+    const data = base64ToArrayBuffer(value);
+    const decrypted = await decryptData(data, this.privateKey);
+    const str = bufferSourceToUtf8(decrypted);
+
+    this.output.innerHTML = str;
   }
 
   render() {
