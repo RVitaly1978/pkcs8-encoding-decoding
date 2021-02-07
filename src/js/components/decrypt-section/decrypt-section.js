@@ -1,33 +1,38 @@
 import Renderer from '../../dom/renderer';
 
-import { decryptData, base64ToArrayBuffer, bufferSourceToUtf8 } from '../../utils';
+import {
+  decryptData,
+  bufferSource16ToStr,
+  b64DecodeUnicode,
+  strToArrayBuffer,
+} from '../../utils';
 
-import './decoding-section.css';
+import './decrypt-section.css';
 
-class DecodingSection {
+class DecryptSection {
   constructor({ privateKey }) {
     this.privateKey = privateKey;
 
     this.input = Renderer.createElement('input', {
-      class: 'decode_message',
+      class: 'decrypt_message',
       type: 'search',
       autocomplete: 'off',
     });
 
     this.button = Renderer.createElement('button', {
       type: 'button',
-      class: 'decode_btn',
+      class: 'decrypt_btn',
       disabled: (this.privateKey),
-      children: ['Decode'],
+      children: ['Decrypt'],
     });
     this.onClick = this.onClick.bind(this);
     this.button.addEventListener('click', this.onClick);
 
     this.output = Renderer.createElement('textarea', {
-      class: 'decode_output',
-      cols: 70,
+      class: 'decrypt_output',
+      cols: 65,
       rows: 15,
-      placeholder: 'The message is not decoded',
+      placeholder: 'The message is not decrypted',
     });
   }
 
@@ -39,24 +44,31 @@ class DecodingSection {
   async onClick() {
     const { value } = this.input;
 
-    const data = base64ToArrayBuffer(value);
+    if (!value) {
+      return;
+    }
+
+    const unicodeStr = b64DecodeUnicode(value);
+    const data = strToArrayBuffer(unicodeStr);
+
     const decrypted = await decryptData(data, this.privateKey);
-    const str = bufferSourceToUtf8(decrypted);
+
+    const str = bufferSource16ToStr(decrypted);
 
     this.output.innerHTML = str;
   }
 
   render() {
     this.row = Renderer.createElement('div', {
-      class: 'decode_input',
+      class: 'decrypt_input',
       children: [
         this.input,
         this.button,
       ],
     });
 
-    this.node = Renderer.createElement('div', {
-      class: 'decode_section',
+    this.node = Renderer.createElement('section', {
+      class: 'decrypt_section',
       children: [
         this.row,
         this.output,
@@ -67,4 +79,4 @@ class DecodingSection {
   }
 }
 
-export default DecodingSection;
+export default DecryptSection;

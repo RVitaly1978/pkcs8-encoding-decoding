@@ -7,10 +7,14 @@ import pemToArrayBuffer from './pem-to-array-buffer';
 import encryptData from './encrypt-data';
 import decryptData from './decrypt-data';
 import {
-  bufferSourceToUtf8,
-  utf8ToArrayBuffer,
+  bufferSourceToStr,
+  strToArrayBuffer,
   base64ToArrayBuffer,
   arrayBufferToBase64,
+  b64EncodeUnicode,
+  b64DecodeUnicode,
+  bufferSource16ToStr,
+  strToArrayBuffer16,
 } from './encode-decode-data';
 
 export {
@@ -22,8 +26,12 @@ export {
   decryptData,
   toPem,
   pemToArrayBuffer,
-  bufferSourceToUtf8,
-  utf8ToArrayBuffer,
+  bufferSourceToStr,
+  strToArrayBuffer,
   base64ToArrayBuffer,
   arrayBufferToBase64,
+  b64EncodeUnicode,
+  b64DecodeUnicode,
+  bufferSource16ToStr,
+  strToArrayBuffer16,
 };

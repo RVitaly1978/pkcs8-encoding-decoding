@@ -5,8 +5,8 @@ import keyTypes from '../../constants';
 
 import KeyGenerator from '../key-generator';
 import KeyProvider from '../key-provider';
-import EncodingSection from '../encoding-section';
-import DecodingSection from '../decoding-section';
+import EncryptSection from '../encrypt-section';
+import DecryptSection from '../decrypt-section';
 
 import './app.css';
 
@@ -33,11 +33,11 @@ class App {
       keyType: keyTypes.private,
     });
 
-    this.encodingSection = new EncodingSection({
+    this.encryptSection = new EncryptSection({
       publicKey: this.state.getState()[keyTypes.public],
     });
 
-    this.decodingSection = new DecodingSection({
+    this.decryptSection = new DecryptSection({
       privateKey: this.state.getState()[keyTypes.private],
     });
 
@@ -54,7 +54,7 @@ class App {
     const key = this.state.getState()[keyTypes.public];
 
     if (key) {
-      this.encodingSection.setKey(key);
+      this.encryptSection.setKey(key);
     }
   }
 
@@ -62,7 +62,7 @@ class App {
     const key = this.state.getState()[keyTypes.private];
 
     if (key) {
-      this.decodingSection.setKey(key);
+      this.decryptSection.setKey(key);
     }
   }
 
@@ -75,13 +75,20 @@ class App {
       ],
     });
 
+    this.cryptoSection = Renderer.createElement('section', {
+      class: 'crypto_section',
+      children: [
+        this.encryptSection.render(),
+        this.decryptSection.render(),
+      ],
+    });
+
     this.node = Renderer.createElement('div', {
       class: 'main',
       children: [
         this.keyGenerator.render(),
         this.keysProviderSection,
-        this.encodingSection.render(),
-        this.decodingSection.render(),
+        this.cryptoSection,
       ],
     });
 

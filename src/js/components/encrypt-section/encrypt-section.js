@@ -1,33 +1,38 @@
 import Renderer from '../../dom/renderer';
 
-import { utf8ToArrayBuffer, encryptData, arrayBufferToBase64 } from '../../utils';
+import {
+  strToArrayBuffer16,
+  encryptData,
+  bufferSourceToStr,
+  b64EncodeUnicode,
+} from '../../utils';
 
-import './encoding-section.css';
+import './encrypt-section.css';
 
-class EncodingSection {
+class EncryptSection {
   constructor({ publicKey }) {
     this.publicKey = publicKey;
 
     this.input = Renderer.createElement('input', {
-      class: 'encode_message',
+      class: 'encrypt_message',
       type: 'search',
       autocomplete: 'off',
     });
 
     this.button = Renderer.createElement('button', {
       type: 'button',
-      class: 'encode_btn',
+      class: 'encrypt_btn',
       disabled: (this.publicKey),
-      children: ['Encode'],
+      children: ['Encrypt'],
     });
     this.onClick = this.onClick.bind(this);
     this.button.addEventListener('click', this.onClick);
 
     this.output = Renderer.createElement('textarea', {
-      class: 'encode_output',
-      cols: 70,
+      class: 'encrypt_output',
+      cols: 65,
       rows: 15,
-      placeholder: 'The message is not encoded',
+      placeholder: 'The message is not encrypted',
     });
   }
 
@@ -39,24 +44,31 @@ class EncodingSection {
   async onClick() {
     const { value } = this.input;
 
-    const data = utf8ToArrayBuffer(value);
+    if (!value) {
+      return;
+    }
+
+    const data = strToArrayBuffer16(value);
+
     const encrypted = await encryptData(data, this.publicKey);
-    const b64 = arrayBufferToBase64(encrypted);
+
+    const unicodeStr = bufferSourceToStr(encrypted);
+    const b64 = b64EncodeUnicode(unicodeStr);
 
     this.output.innerHTML = b64;
   }
 
   render() {
     this.row = Renderer.createElement('div', {
-      class: 'encode_input',
+      class: 'encrypt_input',
       children: [
         this.input,
         this.button,
       ],
     });
 
-    this.node = Renderer.createElement('div', {
-      class: 'encode_section',
+    this.node = Renderer.createElement('section', {
+      class: 'encrypt_section',
       children: [
         this.row,
         this.output,
@@ -67,4 +79,4 @@ class EncodingSection {
   }
 }
 
-export default EncodingSection;
+export default EncryptSection;

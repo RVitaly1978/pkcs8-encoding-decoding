@@ -17,13 +17,13 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.3);
 
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 1.6rem;
-  color: #dddddd;
+  color: #eeeeee;
 }
 
 *,
@@ -98,9 +98,11 @@ textarea {
   background-color: inherit;
 
   font: inherit;
+  font-family: monospace;
+  font-size: 1.2em;
+
   color: inherit;
   outline: none;
-  font-size: 0.75em;
 
   overflow-y: scroll;
   overflow-x: hidden;
@@ -142,6 +144,9 @@ input[type='search'] {
   background-color: inherit;
 
   font: inherit;
+  font-family: monospace;
+  font-size: 1.2em;
+
   color: inherit;
   outline: none;
 }

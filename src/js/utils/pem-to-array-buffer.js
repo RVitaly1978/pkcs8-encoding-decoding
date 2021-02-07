@@ -1,4 +1,4 @@
-import { /* utf8ToArrayBuffer, base64ToUtf8, */ base64ToArrayBuffer } from './encode-decode-data';
+import { base64ToArrayBuffer } from './encode-decode-data';
 
 const removeHeaderAndFooter = (pem, isPrivate = true) => {
   const keyType = isPrivate ? 'PRIVATE' : 'PUBLIC';
@@ -17,9 +17,6 @@ const joinMultiLineToOneLineStr = (multiLineStr) => {
 const pemToArrayBuffer = (pem, isPrivate = true) => {
   const pemBody = removeHeaderAndFooter(pem, isPrivate);
   const pemContent = joinMultiLineToOneLineStr(pemBody);
-
-  // const binaryString = base64ToUtf8(pemContent);
-  // return utf8ToArrayBuffer(binaryString);
 
   return base64ToArrayBuffer(pemContent);
 };

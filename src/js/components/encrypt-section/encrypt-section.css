@@ -1,0 +1,31 @@
+.encrypt_section {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.encrypt_input {
+  display: flex;
+}
+
+.encrypt_message {
+  flex-grow: 1;
+}
+
+.encrypt_btn {
+  min-width: 15rem;
+}
+
+.encrypt_output {
+  flex-grow: 1;
+  flex-shrink: 1;
+
+  height: 100%;
+  margin-top: 0.5rem;
+  padding: var(--padding);
+
+  display: block;
+
+  resize: none;
+}
