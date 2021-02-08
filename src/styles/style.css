@@ -98,8 +98,8 @@ textarea {
   background-color: inherit;
 
   font: inherit;
-  font-family: monospace;
-  font-size: 1.2em;
+  font-family: Courier, monospace;
+  font-size: 1em;
 
   color: inherit;
   outline: none;
@@ -144,7 +144,7 @@ input[type='search'] {
   background-color: inherit;
 
   font: inherit;
-  font-family: monospace;
+  font-family: Courier, monospace;
   font-size: 1.2em;
 
   color: inherit;
