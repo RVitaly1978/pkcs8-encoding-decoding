@@ -13,7 +13,9 @@ const generateKeys = async () => {
       ['encrypt', 'decrypt'],
     );
   } catch (err) {
-    console.dir(err);
+    const e = `Error during generate keys: ${err}`;
+    // eslint-disable-next-line no-alert
+    alert(e);
   }
 
   return keys;

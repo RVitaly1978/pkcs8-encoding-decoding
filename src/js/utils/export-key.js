@@ -5,7 +5,9 @@ const exportKey = async (key, isPrivate = true) => {
   try {
     exported = await window.crypto.subtle.exportKey(format, key);
   } catch (err) {
-    console.dir(err);
+    const e = `Error during export key: ${err}`;
+    // eslint-disable-next-line no-alert
+    alert(e);
   }
 
   return exported;

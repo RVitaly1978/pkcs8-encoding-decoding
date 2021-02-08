@@ -14,14 +14,14 @@ class KeyGenerator {
 
     this.outputPublic = Renderer.createElement('textarea', {
       class: 'key_view',
-      cols: 65,
+      cols: 64,
       rows: 10,
       placeholder: 'Public key section...',
     });
 
     this.outputPrivate = Renderer.createElement('textarea', {
       class: 'key_view',
-      cols: 65,
+      cols: 64,
       rows: 10,
       placeholder: 'Private key section...',
     });

@@ -28,7 +28,9 @@ const importKey = async (key, isPrivate = true) => {
   try {
     imported = await window.crypto.subtle.importKey(...options);
   } catch (err) {
-    console.dir(err);
+    const e = `Error during import key: ${err}`;
+    // eslint-disable-next-line no-alert
+    alert(e);
   }
 
   return imported;

@@ -7,7 +7,9 @@ const decryptData = async (data, privateKey) => {
       data,
     );
   } catch (err) {
-    console.dir(err);
+    const e = `Error during decryption: ${err}`;
+    // eslint-disable-next-line no-alert
+    alert(e);
   }
 
   return decrypted;

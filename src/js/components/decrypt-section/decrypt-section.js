@@ -30,7 +30,7 @@ class DecryptSection {
 
     this.output = Renderer.createElement('textarea', {
       class: 'decrypt_output',
-      cols: 65,
+      cols: 64,
       rows: 15,
       placeholder: 'The message is not decrypted',
     });
@@ -48,11 +48,18 @@ class DecryptSection {
       return;
     }
 
-    const unicodeStr = b64DecodeUnicode(value);
+    let unicodeStr;
+    try {
+      unicodeStr = b64DecodeUnicode(value);
+    } catch (err) {
+      const e = `Error during decoding: ${err}\nProbably you entered incorrect data`;
+      // eslint-disable-next-line no-alert
+      alert(e);
+      return;
+    }
+
     const data = strToArrayBuffer(unicodeStr);
-
     const decrypted = await decryptData(data, this.privateKey);
-
     const str = bufferSource16ToStr(decrypted);
 
     this.output.innerHTML = str;

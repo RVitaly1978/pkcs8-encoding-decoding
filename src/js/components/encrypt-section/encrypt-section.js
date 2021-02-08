@@ -30,7 +30,7 @@ class EncryptSection {
 
     this.output = Renderer.createElement('textarea', {
       class: 'encrypt_output',
-      cols: 65,
+      cols: 64,
       rows: 15,
       placeholder: 'The message is not encrypted',
     });

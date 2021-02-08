@@ -7,7 +7,9 @@ const encryptData = async (data, publicKey) => {
       data,
     );
   } catch (err) {
-    console.dir(err);
+    const e = `Error during encryption: ${err}`;
+    // eslint-disable-next-line no-alert
+    alert(e);
   }
 
   return encrypted;

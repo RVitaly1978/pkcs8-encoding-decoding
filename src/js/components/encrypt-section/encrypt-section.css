@@ -14,7 +14,8 @@
 }
 
 .encrypt_btn {
-  min-width: 15rem;
+  min-width: 12rem;
+  margin-left: 0.5rem;
 }
 
 .encrypt_output {

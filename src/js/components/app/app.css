@@ -8,7 +8,7 @@
   height: 100%;
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: var(--padding);
+  padding: calc(2 * var(--padding));
 
   display: grid;
   grid-template-rows: minmax(1rem, 50%) minmax(1rem, 50%) minmax(1rem, 30%);

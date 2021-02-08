@@ -13,7 +13,7 @@ class KeyProvider {
 
     this.keyInput = Renderer.createElement('textarea', {
       class: 'key_input',
-      cols: 65,
+      cols: 64,
       rows: 15,
       placeholder: `Type the ${this.keyType} key in PKCS#8 in PEM-encoding`,
     });
@@ -21,7 +21,6 @@ class KeyProvider {
     this.submitButton = Renderer.createElement('button', {
       type: 'submit',
       class: 'key_btn',
-      // disabled: true,
       children: [`Submit a ${this.keyType} key`],
     });
   }
@@ -35,9 +34,18 @@ class KeyProvider {
     }
 
     const isPrivate = (this.keyType === keyTypes.private);
-    const key = pemToArrayBuffer(value, isPrivate);
-    const imported = await importKey(key, isPrivate);
 
+    let key;
+    try {
+      key = pemToArrayBuffer(value, isPrivate);
+    } catch (err) {
+      const e = `Error during decoding: ${err}\nProbably you entered incorrect data`;
+      // eslint-disable-next-line no-alert
+      alert(e);
+      return;
+    }
+
+    const imported = await importKey(key, isPrivate);
     this.setState({ [this.keyType]: imported });
   }
 
