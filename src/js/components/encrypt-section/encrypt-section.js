@@ -1,10 +1,10 @@
 import Renderer from '../../dom/renderer';
 
 import {
-  strToArrayBuffer16,
+  utf8ToUint8Array,
   encryptData,
-  bufferSourceToStr,
-  b64EncodeUnicode,
+  bufferSourceToAscii,
+  asciiToBase64,
 } from '../../utils';
 
 import './encrypt-section.css';
@@ -31,7 +31,6 @@ class EncryptSection {
     this.output = Renderer.createElement('textarea', {
       class: 'encrypt_output',
       cols: 64,
-      rows: 15,
       placeholder: 'The message is not encrypted',
     });
   }
@@ -48,12 +47,10 @@ class EncryptSection {
       return;
     }
 
-    const data = strToArrayBuffer16(value);
-
+    const data = utf8ToUint8Array(value);
     const encrypted = await encryptData(data, this.publicKey);
-
-    const unicodeStr = bufferSourceToStr(encrypted);
-    const b64 = b64EncodeUnicode(unicodeStr);
+    const str = bufferSourceToAscii(encrypted);
+    const b64 = asciiToBase64(str);
 
     this.output.innerHTML = b64;
   }

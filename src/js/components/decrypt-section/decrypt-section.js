@@ -2,9 +2,9 @@ import Renderer from '../../dom/renderer';
 
 import {
   decryptData,
-  bufferSource16ToStr,
-  b64DecodeUnicode,
-  strToArrayBuffer,
+  base64ToAscii,
+  asciiToArrayBuffer,
+  bufferSourceToUtf8,
 } from '../../utils';
 
 import './decrypt-section.css';
@@ -31,7 +31,6 @@ class DecryptSection {
     this.output = Renderer.createElement('textarea', {
       class: 'decrypt_output',
       cols: 64,
-      rows: 15,
       placeholder: 'The message is not decrypted',
     });
   }
@@ -48,9 +47,9 @@ class DecryptSection {
       return;
     }
 
-    let unicodeStr;
+    let str;
     try {
-      unicodeStr = b64DecodeUnicode(value);
+      str = base64ToAscii(value);
     } catch (err) {
       const e = `Error during decoding: ${err}\nProbably you entered incorrect data`;
       // eslint-disable-next-line no-alert
@@ -58,11 +57,11 @@ class DecryptSection {
       return;
     }
 
-    const data = strToArrayBuffer(unicodeStr);
+    const data = asciiToArrayBuffer(str);
     const decrypted = await decryptData(data, this.privateKey);
-    const str = bufferSource16ToStr(decrypted);
+    const output = bufferSourceToUtf8(decrypted);
 
-    this.output.innerHTML = str;
+    this.output.innerHTML = output;
   }
 
   render() {

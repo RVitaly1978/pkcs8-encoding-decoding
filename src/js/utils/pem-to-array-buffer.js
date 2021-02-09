@@ -10,8 +10,8 @@ const removeHeaderAndFooter = (pem, isPrivate = true) => {
 };
 
 const joinMultiLineToOneLineStr = (multiLineStr) => {
-  const splitter = '\n';
-  return multiLineStr.split(splitter).join('');
+  const splitter = /\n/g;
+  return multiLineStr.replace(splitter, '');
 };
 
 const pemToArrayBuffer = (pem, isPrivate = true) => {

@@ -14,7 +14,6 @@ class KeyProvider {
     this.keyInput = Renderer.createElement('textarea', {
       class: 'key_input',
       cols: 64,
-      rows: 15,
       placeholder: `Type the ${this.keyType} key in PKCS#8 in PEM-encoding`,
     });
 
