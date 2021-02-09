@@ -1,7 +1,13 @@
+import {
+  exportPrivateKeyFormat as privateFormat,
+  exportPublicKeyFormat as publicFormat,
+} from '../constants';
+
 const exportKey = async (key, isPrivate = true) => {
-  const format = isPrivate ? 'pkcs8' : 'spki';
+  const format = isPrivate ? privateFormat : publicFormat;
 
   let exported;
+
   try {
     exported = await window.crypto.subtle.exportKey(format, key);
   } catch (err) {

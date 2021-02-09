@@ -8,10 +8,10 @@
   height: 100%;
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: calc(2 * var(--padding));
+  padding: calc(4 * var(--padding));
 
   display: grid;
-  grid-template-rows: minmax(1rem, 50%) minmax(1rem, 50%) minmax(1rem, 30%);
+  grid-template-rows: minmax(1rem, 30%) minmax(1rem, 50%) minmax(1rem, 30%);
   grid-gap: var(--padding);
 
   grid-template-areas:
@@ -28,6 +28,7 @@
 
   display: flex;
 
+  margin-top: calc(4 * var(--padding));
   padding-bottom: var(--padding);
 
   border-bottom: var(--border);
