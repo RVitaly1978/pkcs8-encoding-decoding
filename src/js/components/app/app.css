@@ -1,14 +1,16 @@
 #root {
+  position: relative;
+
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .main {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   max-width: var(--maxWidth);
   margin: 0 auto;
-  padding: calc(4 * var(--padding));
+  padding: calc(2 * var(--padding));
 
   display: grid;
   grid-template-rows: minmax(1rem, 30%) minmax(1rem, 50%) minmax(1rem, 30%);
@@ -19,32 +21,76 @@
   "keyProvider"
   "crypto";
 
-  justify-content: center;
+  justify-content: stretch;
   align-content: center;
+}
+
+@media (max-width: 1000px) {
+  .main {
+    height: unset;
+    grid-template-rows: minmax(1rem, 60rem) minmax(1rem, 60rem) minmax(1rem, 40rem);
+  }
+}
+
+@media (max-width: 460px) {
+  .main {
+    padding: var(--padding);
+  }
 }
 
 .keys_provider_section {
   grid-area: keyProvider;
 
+  width: 100%;
+
   display: flex;
 
-  margin-top: calc(4 * var(--padding));
+  margin-top: calc(2 * var(--padding));
   padding-bottom: var(--padding);
 
   border-bottom: var(--border);
   border-width: 5px;
 }
 
+@media (max-width: 1000px) {
+  .keys_provider_section {
+    flex-direction: column;
+  }
+}
+
 .keys_provider_section form + form {
-  margin-left: calc(3 * var(--padding));
+  margin-left: calc(2 * var(--padding));
+}
+
+@media (max-width: 1000px) {
+  .keys_provider_section form + form {
+    margin-left: 0;
+    margin-top: calc(2 * var(--padding));
+  }
 }
 
 .crypto_section {
   grid-area: crypto;
 
+  width: 100%;
+  margin-top: calc(2 * var(--padding));
+
   display: flex;
 }
 
+@media (max-width: 1000px) {
+  .crypto_section {
+    flex-direction: column;
+  }
+}
+
 .crypto_section section + section {
-  margin-left: calc(3 * var(--padding));
+  margin-left: calc(2 * var(--padding));
+}
+
+@media (max-width: 1000px) {
+  .crypto_section section + section {
+    margin-left: 0;
+    margin-top: calc(2 * var(--padding));
+  }
 }

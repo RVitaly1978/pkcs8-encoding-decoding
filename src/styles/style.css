@@ -27,6 +27,12 @@ body {
   color: #eeeeee;
 }
 
+@media (max-width: 460px) {
+  body {
+    font-size: 1.2rem;
+  }
+}
+
 *,
 *::after,
 *::before {
@@ -100,13 +106,43 @@ textarea {
 
   font: inherit;
   font-family: Courier, monospace;
-  font-size: 0.9em;
+  font-size: calc(8px + 20%);
 
   color: var(--colorInput);
   outline: none;
 
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+@media (max-width: 1000px) {
+  textarea {
+    font-size: calc(12px + 20%);
+  }
+}
+
+@media (max-width: 640px) {
+  textarea {
+    font-size: calc(8px + 20%);
+  }
+}
+
+@media (max-width: 520px) {
+  textarea {
+    font-size: calc(7px + 20%);
+  }
+}
+
+@media (max-width: 460px) {
+  textarea {
+    font-size: calc(6px + 20%);
+  }
+}
+
+@media (max-width: 400px) {
+  textarea {
+    font-size: calc(5px + 20%);
+  }
 }
 
 textarea::selection {
